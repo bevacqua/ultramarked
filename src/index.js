@@ -30,14 +30,10 @@ function ultramarked(src, opt) {
     if (options.ultralight){
         options.langPrefix = '';
         options.highlight = function (code, lang) {
-            var lower;
-
-            if (lang) {
-                try {
-                    lower = lang.toLowerCase();
-                    return hljs.highlight(aliases[lower] || lower, code).value;
-                } catch (ex) {} //let marked automatically escape code in a language we don't speak
-            }
+            var lower = (lang || 'no-highlight').toLowerCase();
+            try{
+                return hljs.highlight(aliases[lower] || lower, code).value;
+            } catch (ex) {} // marked will know what to do.
         };
     }
 
