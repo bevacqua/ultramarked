@@ -1,0 +1,26 @@
+{
+  "name": "ultramarked",
+  "description": "Marked with built-in syntax highlighting and input sanitizing that doesn't encode all HTML",
+  "homepage": "https://github.com/bevacqua/ultramarked",
+  "author": {
+    "name": "Nicolas Bevacqua",
+    "email": "nicolasbevacqua@gmail.com",
+    "url": "http://www.ponyfoo.com"
+  },
+  "version": "0.4.0-tip",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bevacqua/ultramarked.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bevacqua/ultramarked/issues"
+  },
+  "dependencies": {
+    "marked": "~0.2.9",
+    "highlight.js": "~7.3.0"
+  },
+  "engines": {
+    "node": "0.10.6",
+    "npm": "1.2.x"
+  }
+}
