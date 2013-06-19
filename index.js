@@ -16,7 +16,7 @@ function ultramarked(src, options) {
     if (options.ultralight){
         options.highlight = function (code, lang) {
             var lower;
-
+console.log('foo');
             if (lang) {
                 try {
                     lower = lang.toLowerCase();
@@ -25,7 +25,7 @@ function ultramarked(src, options) {
             }
         };
     }
-    
+console.log('bar');
     var tokens = marked.lexer(src, options),
         result = marked.parser(tokens, options);
 

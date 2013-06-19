@@ -10,16 +10,16 @@
 
 ## Use
 
-    var ultramarked = require('ultramarked');
+    var marked = require('ultramarked');
 
-    ultramarked.setOptions({
+    marked.setOptions({
         // your options go here
     });
 
-    ultramarked('This is **awesome**!');
+    marked('This is **awesome**!');
 
 ## Configure
 
 ### options.ultralight
 
-Syntax highlighting powered by `highlight.js`, no extra magic.
+Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highlight.js), no extra magic.
