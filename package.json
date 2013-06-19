@@ -23,5 +23,6 @@
   "engines": {
     "node": "0.10.6",
     "npm": "1.2.x"
-  }
+  },
+  "main": "./src/index.js"
 }
