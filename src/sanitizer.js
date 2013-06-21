@@ -83,13 +83,13 @@ var validAttrs = extend({}, uriAttrs, makeMap(
  */
 function htmlParser( html, handler ) {
     var index, chars, match, stack = [], last = html;
-    stack.last = function() { return stack[ stack.length - 1 ]; };
+    stack.lastItem = function() { return stack[ stack.length - 1 ]; };
 
     while ( html ) {
         chars = true;
 
         // Make sure we're not in a script or style element
-        if ( !stack.last() || !specialElements[ stack.last() ] ) {
+        if ( !stack.lastItem() || !specialElements[ stack.lastItem() ] ) {
 
             // Comment
             if ( html.indexOf("<!--") === 0 ) {
@@ -136,7 +136,7 @@ function htmlParser( html, handler ) {
             }
 
         } else {
-            html = html.replace(new RegExp("(.*)<\\s*\\/\\s*" + stack.last() + "[^>]*>", 'i'), function(all, text){
+            html = html.replace(new RegExp("(.*)<\\s*\\/\\s*" + stack.lastItem() + "[^>]*>", 'i'), function(all, text){
                 text = text.
                     replace(COMMENT_REGEXP, "$1").
                     replace(CDATA_REGEXP, "$1");
@@ -148,7 +148,7 @@ function htmlParser( html, handler ) {
                 return "";
             });
 
-            parseEndTag( "", stack.last() );
+            parseEndTag( "", stack.lastItem() );
         }
 
         if ( html == last ) {
@@ -163,12 +163,12 @@ function htmlParser( html, handler ) {
     function parseStartTag( tag, tagName, rest, unary ) {
         tagName = lowercase(tagName);
         if ( blockElements[ tagName ] ) {
-            while ( stack.last() && inlineElements[ stack.last() ] ) {
-                parseEndTag( "", stack.last() );
+            while ( stack.lastItem() && inlineElements[ stack.lastItem() ] ) {
+                parseEndTag( "", stack.lastItem() );
             }
         }
 
-        if ( optionalEndTagElements[ tagName ] && stack.last() == tagName ) {
+        if ( optionalEndTagElements[ tagName ] && stack.lastItem() == tagName ) {
             parseEndTag( "", tagName );
         }
 
