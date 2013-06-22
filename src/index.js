@@ -42,11 +42,11 @@ function ultramarked(src, opt) {
         result = marked.parser(tokens, options);
 
     if(options.ultralight){ // fix the language class using common aliases
-        result = result.replace(/\'ultralight-lang-([\w-]+)\'/ig, function(match, lang){
+        result = result.replace(/"ultralight-lang-([\w-]+)"/ig, function(match, lang){
             var lower = m.toLowerCase(),
                 result = aliases[lang] || lang || no;
 
-            return '\'' + result + '\'';
+            return '"' + result + '"';
         });
     }
 
