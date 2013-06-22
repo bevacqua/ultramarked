@@ -43,8 +43,8 @@ function ultramarked(src, opt) {
 
     if(options.ultralight){ // fix the language class using common aliases
         result = result.replace(/"ultralight-lang-([\w-]+)"/ig, function(match, lang){
-            var lower = m.toLowerCase(),
-                result = aliases[lang] || lang || no;
+            var lower = lang.toLowerCase(),
+                result = aliases[lower] || lower || no;
 
             return '"' + result + '"';
         });
