@@ -29,7 +29,7 @@ function ultramarked(src, opt) {
         no = 'no-highlight';
 
     if (options.ultralight){
-        options.langPrefix = 'ultralight-lang-';
+        options.langPrefix = 'ultralight-lang-'; // placeholder
         options.highlight = function (code, lang) {
             var lower = (lang || no).toLowerCase();
             try{
@@ -41,7 +41,7 @@ function ultramarked(src, opt) {
     var tokens = marked.lexer(src, options),
         result = marked.parser(tokens, options);
 
-    if(options.ultralight){
+    if(options.ultralight){ // fix the language class using common aliases
         result = result.replace(/\'ultralight-lang-([\w-]+)\'/ig, function(match, lang){
             var lower = m.toLowerCase(),
                 result = aliases[lang] || lang || no;
