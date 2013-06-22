@@ -25,12 +25,13 @@ function merge(obj) {
 
 function ultramarked(src, opt) {
     var options = merge({}, marked.defaults, opt),
-        aliases = options.aliases || exports.aliases;
+        aliases = options.aliases || exports.aliases,
+        no = 'no-highlight';
 
     if (options.ultralight){
-        options.langPrefix = '';
+        options.langPrefix = 'ultralight-lang-';
         options.highlight = function (code, lang) {
-            var lower = (lang || 'no-highlight').toLowerCase();
+            var lower = (lang || no).toLowerCase();
             try{
                 return hljs.highlight(aliases[lower] || lower, code).value;
             } catch (ex) {} // marked will know what to do.
@@ -39,6 +40,15 @@ function ultramarked(src, opt) {
 
     var tokens = marked.lexer(src, options),
         result = marked.parser(tokens, options);
+
+    if(options.ultralight){
+        result = result.replace(/\'ultralight-lang-([\w-]+)\'/ig, function(match, lang){
+            var lower = m.toLowerCase(),
+                result = aliases[lang] || lang || no;
+
+            return '\'' + result + '\'';
+        });
+    }
 
     if(options.ultrasanitize){
         result = require('./sanitizer.js')(result);
