@@ -5,7 +5,8 @@ var marked = require('marked'),
     exports = module.exports = ultramarked,
     alises = exports.aliases = {
         'js': 'javascript',
-        'md': 'markdown'
+        'md': 'markdown',
+        'html': 'xml' // next best thing
     };
 
 function merge(obj) {
