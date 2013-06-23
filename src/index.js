@@ -6,7 +6,8 @@ var marked = require('marked'),
     alises = exports.aliases = {
         'js': 'javascript',
         'md': 'markdown',
-        'html': 'xml' // next best thing
+        'html': 'xml', // next best thing
+        'jade': 'css' // next best thing
     };
 
 function merge(obj) {
