@@ -1,6 +1,6 @@
 'use strict';
 
-var ent = require('ent');
+var he = require('he');
 
 /*
  * HTML Parser By Misko Hevery (misko@hevery.com)
@@ -131,7 +131,7 @@ function htmlParser( html, handler ) {
                 html = index < 0 ? "" : html.substring( index );
 
                 if (handler.chars){
-                    handler.chars( ent.decode(text) );
+                    handler.chars( he.decode(text) );
                 }
             }
 
@@ -142,7 +142,7 @@ function htmlParser( html, handler ) {
                     replace(CDATA_REGEXP, "$1");
 
                 if (handler.chars){
-                    handler.chars( ent.decode(text) );
+                    handler.chars( he.decode(text) );
                 }
 
                 return "";
@@ -185,7 +185,7 @@ function htmlParser( html, handler ) {
                 || unqoutedValue
                 || '';
 
-            attrs[name] = ent.decode(value);
+            attrs[name] = he.decode(value);
         });
         if (handler.start) handler.start( tagName, attrs, unary );
     }
@@ -266,7 +266,7 @@ function htmlSanitizeWriter(buf){
                         out(' ');
                         out(key);
                         out('="');
-                        out(ent.encode(value));
+                        out(he.encode(value));
                         out('"');
                     }
                 });
@@ -286,7 +286,7 @@ function htmlSanitizeWriter(buf){
             },
         chars: function(chars){
                 if (!ignore) {
-                    out(ent.encode(chars));
+                    out(he.encode(chars));
                 }
             }
     };
@@ -299,7 +299,7 @@ function makeMap(str){
 
     for ( i = 0; i < items.length; i++ ){
         obj[ items[i] ] = true;
-    }    
+    }
     return obj;
 }
 
@@ -329,7 +329,7 @@ function forEach(obj, iterator, context) {
     } else if (Array.isArray(obj)) {
         for (key = 0; key < obj.length; key++){
             iterator.call(context, obj[key], key);
-        }        
+        }
     } else {
           for (key in obj) {
             if (obj.hasOwnProperty(key)) {
