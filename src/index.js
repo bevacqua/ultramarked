@@ -10,6 +10,8 @@ var marked = require('marked'),
         'jade': 'css' // next best thing
     };
 
+hljs.configure({ classPrefix: 'hljs-' });
+
 function merge(obj) {
     var i = 1, target, key;
 
@@ -25,6 +27,26 @@ function merge(obj) {
     return obj;
 }
 
+function getHighlightingRenderer () {
+    var renderer = new marked.Renderer();
+    var baseCodeRenderer = renderer.code;
+    var baseCodeSpanRenderer = renderer.codespan;
+
+    renderer.code = function () {
+        var result = baseCodeRenderer.apply(this, arguments);
+        var classed = result.replace(/^<pre><code>/i, '<pre class="hljs-pre"><code class="hljs">');
+        console.log(result);
+        return classed;
+    };
+    renderer.codespan = function () {
+        var result = baseCodeSpanRenderer.apply(this, arguments);
+        var classed = result.replace(/^<code>/i, '<code class="hljs">');
+        console.log(result);
+        return classed;
+    };
+    return renderer;
+}
+
 function ultramarked(src, opt) {
     var options = merge({}, marked.defaults, opt),
         aliases = options.aliases || exports.aliases,
@@ -33,23 +55,28 @@ function ultramarked(src, opt) {
     if (options.ultralight){
         options.langPrefix = 'ultralight-lang-'; // placeholder
         options.highlight = function (code, lang) {
-            var lower = (lang || no).toLowerCase();
+            if (!lang) {
+                return code;
+            }
+            var lower = lang.toLowerCase();
             try{
                 return hljs.highlight(aliases[lower] || lower, code).value;
             } catch (ex) {} // marked will know what to do.
         };
+        options.renderer = getHighlightingRenderer();
     }
 
     var tokens = marked.lexer(src, options),
         result = marked.parser(tokens, options);
 
-    if(options.ultralight){ // fix the language class using common aliases
-        result = result.replace(/"ultralight-lang-([\w-]+)"/ig, function(match, lang){
+    if (options.ultralight) { // fix the language class using common aliases
+        result = result.replace(/"ultralight-lang-([\w-]+)"/ig, function (match, lang) {
             var lower = lang.toLowerCase(),
                 result = aliases[lower] || lower || no;
 
-            return '"' + result + '"';
+            return '"hljs ' + result + '"';
         });
+        result = result.replace(/^<pre>/, '<pre class="hljs-pre">');
     }
 
     if(options.ultrasanitize){

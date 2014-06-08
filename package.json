@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "he": "^0.4.1",
-    "highlight.js": "~7.3.0",
-    "marked": "~0.2.9"
+    "highlight.js": "^8.0.0",
+    "marked": "^0.3.2"
   },
   "engines": {
     "node": "0.10.6",
