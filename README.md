@@ -22,7 +22,7 @@
 
 ### options.ultralight
 
-Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highlight.js), no extra magic.
+Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highlight.js), no extra magic. Classes are prefixed `hljs` for convenience.
 
 ### options.ultrasanitize
 
