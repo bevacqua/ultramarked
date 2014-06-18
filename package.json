@@ -25,10 +25,6 @@
     "underscore.string": "^2.3.3",
     "wordwrap": "0.0.2"
   },
-  "engines": {
-    "node": "0.10.6",
-    "npm": "1.2.x"
-  },
   "main": "./src/node.js",
   "browser": "./src/browser.js"
 }
