@@ -32,6 +32,10 @@ As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set t
 
 Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultralight`, because color codes.
 
+![terminal.png][1]
+
 ### options.ultrasanitize_pagedown
 
 Angular's sanitizer option might be too lenient for you. If that's the case, you can use PageDown's white-list instead, which is much more narrow, and doesn't allow setting class attributes, for example.
+
+[1]: http://i.imgur.com/fTh1JiD.png
