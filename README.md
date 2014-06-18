@@ -30,7 +30,7 @@ As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set t
 
 ### options.terminal
 
-Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultralight`, because color codes.
+Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultrasanitize`, because color codes.
 
 ![terminal.png][1]
 
