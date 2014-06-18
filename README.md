@@ -22,12 +22,15 @@
 
 ### options.ultralight
 
-Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highlight.js), no extra magic. Classes are prefixed `hljs` for convenience.
+Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highlight.js), no extra magic. Classes are prefixed `hljs` for convenience. Note that the `renderer` you choose will be overridden.
 
 ### options.ultrasanitize
 
 As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set this option to true to use the [AngularJS Sanitizer](https://github.com/angular/angular.js/blob/master/lib/htmlparser/htmlparser.js) sanitizer, tweaked to disallow script and style tags.
 
+### options.terminal
+
+Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultralight`, because color codes.
 
 ### options.ultrasanitize_pagedown
 

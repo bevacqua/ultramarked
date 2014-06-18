@@ -27,21 +27,19 @@ function merge(obj) {
     return obj;
 }
 
-function getHighlightingRenderer () {
-    var renderer = new marked.Renderer();
+function getHighlightingRenderer (prev) {
+    var renderer = prev || new marked.Renderer();
     var baseCodeRenderer = renderer.code;
     var baseCodeSpanRenderer = renderer.codespan;
 
     renderer.code = function () {
         var result = baseCodeRenderer.apply(this, arguments);
         var classed = result.replace(/^<pre><code>/i, '<pre class="hljs-pre"><code class="hljs">');
-        console.log(result);
         return classed;
     };
     renderer.codespan = function () {
         var result = baseCodeSpanRenderer.apply(this, arguments);
         var classed = result.replace(/^<code>/i, '<code class="hljs">');
-        console.log(result);
         return classed;
     };
     return renderer;
@@ -52,6 +50,10 @@ function ultramarked(src, opt) {
         aliases = options.aliases || exports.aliases,
         no = 'no-highlight';
 
+    if (options.terminal){
+        delete options.ultralight;
+        delete options.ultrasanitize;
+    }
     if (options.ultralight){
         options.langPrefix = 'ultralight-lang-'; // placeholder
         options.highlight = function (code, lang) {
@@ -63,7 +65,7 @@ function ultramarked(src, opt) {
                 return hljs.highlight(aliases[lower] || lower, code).value;
             } catch (ex) {} // marked will know what to do.
         };
-        options.renderer = getHighlightingRenderer();
+        options.renderer = getHighlightingRenderer(options.renderer);
     }
 
     var tokens = marked.lexer(src, options),
