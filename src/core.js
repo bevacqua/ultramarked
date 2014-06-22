@@ -83,8 +83,8 @@ function ultramarked(src, opt) {
 
     if(options.ultrasanitize){
         result = require('./sanitizer.js')(result);
-    }else if(options.ultrasanitize_pagedown){
-        result = require('./sanitizer-pagedown.js')(result);
+    }else if(options.sanitizer){
+        result = options.sanitizer(result);
     }
 
     return result;

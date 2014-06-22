@@ -10,13 +10,13 @@
 
 ## Use
 
-    var marked = require('ultramarked');
+    var ultramarked = require('ultramarked');
 
-    marked.setOptions({
+    ultramarked.setOptions({
         // your options go here
     });
 
-    marked('This is **awesome**!');
+    ultramarked('This is **awesome**!');
 
 ## Configure
 
@@ -34,8 +34,14 @@ Prettifies the code for terminal output! Incompatible with `ultralight`, which w
 
 ![terminal.png][1]
 
-### options.ultrasanitize_pagedown
+### options.sanitizer
 
 Angular's sanitizer option might be too lenient for you. If that's the case, you can use PageDown's white-list instead, which is much more narrow, and doesn't allow setting class attributes, for example.
+
+```js
+ultramarked.setOptions({
+	sanitizer: require('pagedown-sanitizer')
+});
+```
 
 [1]: http://i.imgur.com/fTh1JiD.png
