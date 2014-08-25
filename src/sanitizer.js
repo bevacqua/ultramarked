@@ -205,14 +205,14 @@ function htmlParser( html, handler ) {
  }
 }
 
-function invalidIframe (tag, attrs, options) {
+function invalidSource (tag, attrs, options) {
   if (tag !== 'iframe') {
     return false;
   }
   if (!options.iframes || !attrs.src) {
     return true;
   }
-  return !options.iframes.some(function iframeTest (value) {
+  return !options.iframes.some(function (value) {
     if (typeof value === 'string') {
       return attrs.src === value;
     }
@@ -267,9 +267,12 @@ function htmlSanitizeWriter(buf, options){
    if (!ignore && specialElements[tag]) {
     ignore = tag;
    }
-   if (!ignore && validElements[tag] == true && !invalidIframe(tag, attrs, options)) {
+   if (!ignore && validElements[tag] == true) {
     out('<');
     out(tag);
+    if (invalidIframe(tag, attrs, options)) {
+      delete attrs.src;
+    }
     forEach(attrs, function(value, key){
      var lkey=lowercase(key);
      if (validAttrs[lkey]==true && (uriAttrs[lkey]!==true || value.match(URI_REGEXP))) {
