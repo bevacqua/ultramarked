@@ -205,7 +205,7 @@ function htmlParser( html, handler ) {
  }
 }
 
-function invalidSource (tag, attrs, options) {
+function invalidIframeSource (tag, attrs, options) {
   if (tag !== 'iframe') {
     return false;
   }
@@ -270,7 +270,7 @@ function htmlSanitizeWriter(buf, options){
    if (!ignore && validElements[tag] == true) {
     out('<');
     out(tag);
-    if (invalidIframe(tag, attrs, options)) {
+    if (invalidIframeSource(tag, attrs, options)) {
       delete attrs.src;
     }
     forEach(attrs, function(value, key){
