@@ -26,11 +26,15 @@ Syntax highlighting powered by [highlight.js](https://github.com/isagalaev/highl
 
 ### options.ultrasanitize
 
-As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set this option to true to use the [AngularJS Sanitizer](https://github.com/angular/angular.js/blob/master/lib/htmlparser/htmlparser.js) sanitizer, tweaked to disallow script and style tags.
+As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set this option to true to use the [AngularJS Sanitizer][2] sanitizer, tweaked to disallow script and style tags.
+
+### options.iframes
+
+If you are using `ultrasanitize`, you can pass in an array of strings or regular expressions that match permitted `iframe` targets.
 
 ### options.terminal
 
-Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultrasanitize`, because color codes.
+Prettifies the code for terminal output! Incompatible with `ultralight`, which will be disabled when `terminal` is enabled. Also turns off `ultrasanitize`, because color codes. Luckily none of that will be an issue when rendering HTML for the terminal!
 
 ![terminal.png][1]
 
@@ -45,3 +49,4 @@ ultramarked.setOptions({
 ```
 
 [1]: http://i.imgur.com/fTh1JiD.png
+[2]: https://github.com/angular/angular.js/blob/master/lib/htmlparser/htmlparser.js

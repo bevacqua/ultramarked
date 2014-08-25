@@ -1,16 +1,25 @@
 'use strict';
 
-var marked = require('marked'),
-    hljs = require('highlight.js'),
-    exports = module.exports = ultramarked,
-    alises = exports.aliases = {
-        'js': 'javascript',
-        'md': 'markdown',
-        'html': 'xml', // next best thing
-        'jade': 'css' // next best thing
-    };
+var marked = require('marked');
+var hljs = require('highlight.js');
+var exports = module.exports = ultramarked;
+var alises = exports.aliases = {
+    'js': 'javascript',
+    'md': 'markdown',
+    'html': 'xml', // next best thing
+    'jade': 'css' // next best thing
+};
+
 
 hljs.configure({ classPrefix: 'hljs-' });
+
+function createRenderer (options) {
+    var renderer = new marked.Renderer();
+    Object.keys(options).forEach(function map (key) {
+        renderer[key] = options[key];
+    });
+    return renderer;
+}
 
 function merge(obj) {
     var i = 1, target, key;
@@ -82,7 +91,7 @@ function ultramarked(src, opt) {
     }
 
     if(options.ultrasanitize){
-        result = require('./sanitizer.js')(result);
+        result = require('./sanitizer.js')(result, options);
     }else if(options.sanitizer){
         result = options.sanitizer(result);
     }
@@ -91,3 +100,4 @@ function ultramarked(src, opt) {
 }
 
 ultramarked.setOptions = marked.setOptions;
+ultramarked.renderer = createRenderer;
