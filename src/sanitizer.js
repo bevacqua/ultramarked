@@ -77,11 +77,14 @@ var validAttrs = extend({}, uriAttrs, makeMap(
  * @param {object} handler
  */
 function htmlParser( html, handler ) {
- var index, chars, match, stack = [], last = html;
- stack.lastItem = function() { return stack[ stack.length - 1 ]; };
+  var index, chars, match, stack = [], last = html;
 
- while ( html ) {
-  chars = true;
+  stack.lastItem = function () {
+    return stack[ stack.length - 1 ];
+  };
+
+  while ( html ) {
+    chars = true;
 
   // Make sure we're not in a script or style element
   if ( !stack.lastItem() || !specialElements[ stack.lastItem() ] ) {
@@ -214,7 +217,7 @@ function invalidIframeSource (tag, attrs, options) {
   }
   return !options.iframes.some(function (value) {
     if (typeof value === 'string') {
-      return attrs.src === value;
+      return attrs.src.lastIndexOf(value, 0) === 0;
     }
     return value.test(attrs.src);
   });
@@ -375,12 +378,15 @@ function bind(self, fn) {
  }
 }
 
-var lowercase = function(string){return typeof string === 'string' ? string.toLowerCase() : string;};
+function lowercase (string) {
+  return typeof string === 'string' ? string.toLowerCase() : string;
+}
 
-module.exports = function(html, options){
- var buffer = [];
+module.exports = function (html, options) {
+  var emptyIframe = /<iframe>\s*<\/iframe>/ig;
+  var buffer = [];
 
- htmlParser(html, htmlSanitizeWriter(buffer, options));
+  htmlParser(html, htmlSanitizeWriter(buffer, options));
 
- return buffer.join('');
+  return buffer.join('').replace(emptyIframe, '');
 };

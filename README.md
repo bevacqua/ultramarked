@@ -30,7 +30,7 @@ As of right now, Marked encodes **all** HTML input when `sanitize = true`. Set t
 
 ### options.iframes
 
-If you are using `ultrasanitize`, you can pass in an array of strings or regular expressions that match permitted `iframe` targets.
+If you are using `ultrasanitize`, you can pass in an array of strings or regular expressions that match permitted `iframe` targets. Regular expressions are tested against user input, and strings are interpreted as the beginning of a URL. This means that an string like `'http://google.com'` will match any URL in the `google.com` domain that uses the `HTTP` protocol.
 
 ### options.terminal
 
