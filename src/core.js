@@ -2,6 +2,7 @@
 
 var marked = require('marked');
 var hljs = require('highlight.js');
+var assign = require('lodash.assign');
 var exports = module.exports = ultramarked;
 var alises = exports.aliases = {
     'js': 'javascript',
@@ -19,21 +20,6 @@ function createRenderer (options) {
         renderer[key] = options[key];
     });
     return renderer;
-}
-
-function merge(obj) {
-    var i = 1, target, key;
-
-    for(; i < arguments.length; i++){
-        target = arguments[i];
-
-        for(key in target){
-            if(Object.prototype.hasOwnProperty.call(target, key)){
-                obj[key] = target[key];
-            }
-        }
-    }
-    return obj;
 }
 
 function getHighlightingRenderer (prev) {
@@ -55,7 +41,7 @@ function getHighlightingRenderer (prev) {
 }
 
 function ultramarked(src, opt) {
-    var options = merge({}, marked.defaults, opt),
+    var options = assign({}, marked.defaults, opt),
         aliases = options.aliases || exports.aliases,
         no = 'no-highlight';
 
@@ -93,9 +79,8 @@ function ultramarked(src, opt) {
     if(options.ultrasanitize){
         result = require('./sanitizer.js')(result, options);
     }else if(options.sanitizer){
-        result = options.sanitizer(result);
+        result = options.sanitizer(result, options);
     }
-
     return result;
 }
 
