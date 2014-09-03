@@ -7,7 +7,7 @@
     "email": "nicolasbevacqua@gmail.com",
     "url": "http://www.ponyfoo.com"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/bevacqua/ultramarked.git"
@@ -16,6 +16,7 @@
     "url": "https://github.com/bevacqua/ultramarked/issues"
   },
   "dependencies": {
+    "ent": "^2.0.0",
     "he": "^0.4.1",
     "highlight-redux": "^1.0.0",
     "highlight.js": "^8.0.0",
@@ -30,6 +31,7 @@
   "main": "./src/node.js",
   "browser": {
     "./src/node.js": "./src/browser.js",
-    "highlight.js": "highlight-redux"
+    "highlight.js": "highlight-redux",
+    "he": "ent"
   }
 }
