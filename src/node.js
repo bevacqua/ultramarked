@@ -2,13 +2,22 @@
 
 var marked = require('marked');
 var term = require('./terminal');
-var original = marked.setOptions;
+var core = require('./core');
 
-marked.setOptions = function (opt) {
-	if (opt.terminal) {
-		opt.renderer = term;
-	}
-	original.apply(marked, arguments);
+function fwd (src, opt) {
+  if (opt.terminal) {
+    opt.renderer = term;
+  }
+  return core(src, opt);
+}
+
+fwd.setOptions = function (opt) {
+  if (opt.terminal) {
+    opt.renderer = term;
+  }
+  core.setOptions.apply(marked, arguments);
 };
 
-module.exports = require('./core');
+fwd.renderer = core.renderer;
+
+module.exports = fwd;
