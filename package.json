@@ -31,6 +31,6 @@
   "browser": {
     "./src/node.js": "./src/browser.js",
     "highlight.js": "highlight-redux",
-    "he": "../lib/he-lite"
+    "he": "./lib/he-lite.js"
   }
 }
