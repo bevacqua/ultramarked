@@ -7,7 +7,7 @@
     "email": "nicolasbevacqua@gmail.com",
     "url": "http://www.ponyfoo.com"
   },
-  "version": "1.4.0",
+  "version": "1.4.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/bevacqua/ultramarked.git"
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "he": "^0.4.1",
-    "highlight-redux": "^1.0.0",
+    "highlight-redux": "^1.0.1",
     "highlight.js": "^8.0.0",
     "lodash.assign": "^2.4.1",
     "marked": "^0.3.2"
