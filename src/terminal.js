@@ -1,26 +1,11 @@
 'use strict';
 
 var marked = require('marked');
-var chalk;
-var wordwrap;
-var _s;
-
-try {
-  chalk = require('chalk');
-  wordwrap = require('wordwrap');
-  _s = require('underscore.string');
-} catch (e) {
-  console.error([
-    "terminal support in ultramarked requires npm packages `chalk`, `wordwrap`, and `underscore.string`.",
-    "it isn't in the package.json as a dependency because nobody really cares",
-    "about markdown in the terminal apparently. Install them with",
-    "`npm install chalk wordwrap underscore.string`."
-  ].join('\n'));
-
-  return;
-}
-
+var chalk = require('chalk');
+var wordwrap = require('wordwrap');
+var _s = require('underscore.string');
 var width = process.stdout.getWindowSize && process.stdout.getWindowSize()[0];
+
 if (!width) {
   width = 90;
 }
