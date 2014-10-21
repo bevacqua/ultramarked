@@ -2,7 +2,7 @@
 
 var marked = require('marked');
 var hljs = require('highlight.js');
-var assign = require('lodash.assign');
+var assign = require('./assign');
 var exports = module.exports = ultramarked;
 var alises = exports.aliases = {
     'js': 'javascript',
