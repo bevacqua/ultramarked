@@ -5,14 +5,14 @@ var term = require('./terminal');
 var core = require('./core');
 
 function fwd (src, opt) {
-  if (opt.terminal) {
+  if (opt && opt.terminal) {console.log('TERM!');
     opt.renderer = term;
   }
   return core(src, opt);
 }
 
 fwd.setOptions = function (opt) {
-  if (opt.terminal) {
+  if (opt && opt.terminal) {
     opt.renderer = term;
   }
   core.setOptions.apply(marked, arguments);

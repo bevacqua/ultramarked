@@ -9,7 +9,7 @@ function assign () {
     item = stack.shift();
     for (key in item) {
       if (item.hasOwnProperty(key)) {
-        if (result[key]) {
+        if (result[key] && typeof result[key] === 'object') {
           result[key] = assign(result[key], item[key]);
         } else {
           result[key] = item[key];
