@@ -42,7 +42,7 @@ var optionalEndTagElements = extend({}, optionalEndTagInlineElements, optionalEn
 // Safe Block Elements - HTML5
 var blockElements = extend({}, optionalEndTagBlockElements, makeMap('address,article,aside,' +
   'blockquote,caption,center,del,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5,h6,' +
-  'header,hgroup,hr,ins,map,menu,nav,ol,pre,script,section,table,ul,iframe'));
+  'header,hgroup,hr,ins,map,menu,nav,ol,pre,section,table,ul,iframe'));
 
 // Inline Elements - HTML5
 var inlineElements = extend({}, optionalEndTagInlineElements, makeMap('a,abbr,acronym,b,bdi,bdo,' +
@@ -51,7 +51,7 @@ var inlineElements = extend({}, optionalEndTagInlineElements, makeMap('a,abbr,ac
 
 
 // Special Elements (can contain anything)
-var specialElements = {}; // makeMap('script,style')
+var specialElements = {};
 
 var validElements = extend({}, voidElements, blockElements, inlineElements, optionalEndTagElements);
 
