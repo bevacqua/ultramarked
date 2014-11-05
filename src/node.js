@@ -5,7 +5,7 @@ var term = require('./terminal');
 var core = require('./core');
 
 function fwd (src, opt) {
-  if (opt && opt.terminal) {console.log('TERM!');
+  if (opt && opt.terminal) {
     opt.renderer = term;
   }
   return core(src, opt);
