@@ -18,6 +18,7 @@ fwd.setOptions = function (opt) {
   core.setOptions.apply(marked, arguments);
 };
 
+fwd.parse = fwd;
 fwd.renderer = core.renderer;
 
 module.exports = fwd;
