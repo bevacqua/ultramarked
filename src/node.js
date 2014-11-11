@@ -3,6 +3,7 @@
 var marked = require('marked');
 var term = require('./terminal');
 var core = require('./core');
+var assign = require('./assign');
 
 function fwd (src, opt) {
   if (opt && opt.terminal) {
@@ -18,7 +19,16 @@ fwd.setOptions = function (opt) {
   core.setOptions.apply(marked, arguments);
 };
 
-fwd.parse = fwd;
+function parse (src, opt) {
+  var defaults = {
+    smartLists: true,
+    ultralight: true,
+    ultrasanitize: true
+  };
+  return fwd(src, assign(defaults, opt));
+}
+
+fwd.parse = parse;
 fwd.renderer = core.renderer;
 
 module.exports = fwd;
